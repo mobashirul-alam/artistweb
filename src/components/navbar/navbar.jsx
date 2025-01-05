@@ -3,9 +3,9 @@
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { Equal } from "lucide-react";
 import Link from "next/link";
 import { useRef } from "react";
+import { PiEquals } from "react-icons/pi";
 
 const Navbar = () => {
     const { scrollDirection, isScrolled } = useScrollDirection();
@@ -85,11 +85,11 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`fixed w-full transition-all duration-300 ${
+            className={`fixed w-full transition-all duration-300 z-50 ${
                 scrollDirection === "down" ? "-top-[100px]" : "top-0"
             } ${
                 isScrolled
-                    ? "bg-white/80 backdrop-blur-md shadow-sm"
+                    ? "bg-white/70 backdrop-blur-md shadow-sm"
                     : "bg-transparent"
             }`}
         >
@@ -102,14 +102,12 @@ const Navbar = () => {
                         ref={buttonRef}
                         className="relative px-6 py-3 text-base font-medium rounded-full border border-[#545cff] overflow-hidden inline-block w-[143px] h-[38px]"
                     >
-                        {/* First text */}
                         <span
                             ref={text1Ref}
                             className="absolute w-full text-center top-1/2 left-0 -translate-y-1/2"
                         >
                             Get in touch
                         </span>
-                        {/* Second text */}
                         <span
                             ref={text2Ref}
                             className="absolute w-full text-center top-1/2 left-0 -translate-y-1/2"
@@ -126,13 +124,13 @@ const Navbar = () => {
                             ref={text1Ref2}
                             className="absolute w-full flex justify-center items-center top-1/2 left-0 -translate-y-1/2"
                         >
-                            <Equal className="h-6 w-6" />
+                            <PiEquals className="h-6 w-6" />
                         </span>
                         <span
                             ref={text2Ref2}
                             className="absolute w-full flex justify-center items-center top-1/2 left-0 -translate-y-1/2"
                         >
-                            <Equal className="h-6 w-6" />
+                            <PiEquals className="h-6 w-6" />
                         </span>
                     </button>
                 </div>
