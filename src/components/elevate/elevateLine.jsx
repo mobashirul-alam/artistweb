@@ -19,7 +19,6 @@ const ElevateLine = () => {
                 start: "top 75%",
                 end: "top 10%",
                 scrub: 2,
-                markers: true,
             },
         });
     }, []);
