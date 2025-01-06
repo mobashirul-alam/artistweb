@@ -1,4 +1,5 @@
 import Banner from "@/components/banner/banner";
+import ClientFeedback from "@/components/clientFeedback/clientFeedback";
 import Crafting from "@/components/crafting/crafting";
 import DigitalPartner from "@/components/digitalPartner/digitalPartner";
 import DigitalGoal from "@/components/elevate/digitalGoal";
@@ -20,16 +21,7 @@ export default function Home() {
             <DigitalGoal />
             <Crafting />
             <OurService />
-            <div className="h-screen flex items-center justify-center bg-cyan-500">
-                <p className="text-white font-bold text-9xl text-center">
-                    Welcome
-                </p>
-            </div>
-            <div className="h-screen flex items-center justify-center bg-green-500">
-                <p className="text-white font-bold text-9xl text-center">
-                    Bangladesh
-                </p>
-            </div>
+            <ClientFeedback />
         </main>
     );
 }

@@ -1,3 +1,4 @@
+import Footer from "@/components/footer/footer";
 import Navbar from "@/components/navbar/navbar";
 import { Onest } from "next/font/google";
 import "./globals.css";
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
             <body className={`${onest.className} antialiased`}>
                 <Navbar />
                 {children}
+                <Footer />
             </body>
         </html>
     );
