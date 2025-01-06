@@ -26,8 +26,7 @@ const Work = () => {
         if (work) {
             gsap.set(work, { transform: "translateX(0)" }); // Set initial state
             gsap.to(work, {
-                transform: "translateX(-170%)",
-                duration: 5,
+                transform: "translateX(-165%)",
                 scrollTrigger: {
                     trigger: trigger,
                     start: "top 15%",
