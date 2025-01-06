@@ -3,8 +3,43 @@ import Link from "next/link";
 import { BsArrowRight } from "react-icons/bs";
 
 const Services = () => {
+    const services = [
+        {
+            id: 1,
+            title: "E-commerce",
+            link: "/",
+            image: "https://d3aj5vjnhssdu4.cloudfront.net/wp-content/uploads/01_Alveena_Casa_London_Web_Design_New-250x250.jpg",
+            linkText: "Latest Case Study",
+            linkTitle: "Alveena Casa",
+        },
+        {
+            id: 2,
+            title: "Website Design",
+            link: "/",
+            image: "https://d3aj5vjnhssdu4.cloudfront.net/wp-content/uploads/01_Estate-Agency-Web-Design-London-250x250.jpg",
+            linkText: "Latest Case Study",
+            linkTitle: "Romans & Partners",
+        },
+        {
+            id: 3,
+            title: "Digital Products",
+            link: "/",
+            image: "https://d3aj5vjnhssdu4.cloudfront.net/wp-content/uploads/Fudli-Restaurant-Food-Order-System-250x250.jpg",
+            linkText: "Latest Case Study",
+            linkTitle: "Fudli App",
+        },
+        {
+            id: 4,
+            title: "Brand Identities",
+            link: "/",
+            image: "https://d3aj5vjnhssdu4.cloudfront.net/wp-content/uploads/learning_featured-image-250x250.jpeg",
+            linkText: "Latest Case Study",
+            linkTitle: "Learning Library",
+        },
+    ];
+
     return (
-        <section className="bg-black text-white px-[90px] py-36">
+        <section className="bg-black text-white px-[90px] py-36 bg-[radial-gradient(circle_at_75%_140%,_#545cff_0%,_transparent_35%)]">
             <div>
                 <h2 className="text-[28px] mb-12 font-light">
                     Our team of experts can help you with...
@@ -12,36 +47,31 @@ const Services = () => {
 
                 {/* Services List */}
                 <div className="space-y-6 mb-16">
-                    {[
-                        "E-commerce",
-                        "Website Design",
-                        "Digital Products",
-                        "Brand Identities",
-                    ].map((service) => (
+                    {services.map((service) => (
                         <div
-                            key={service}
+                            key={service.id}
                             className="flex justify-between items-center group cursor-pointer"
                         >
                             <h3 className="text-[68px] font-semibold leading-[94px] group-hover:text-[63px] transition-all duration-500">
-                                {service}
+                                {service.title}
                             </h3>
 
                             <Link
-                                href="/"
+                                href={service.link}
                                 className="hidden group-hover:flex items-center gap-x-8 transition-all duration-500"
                             >
                                 <div className="text-left">
                                     <p className="text-sm text-gray-400">
-                                        Latest Case Study
+                                        {service.linkText}
                                     </p>
                                     <p className="text-[28px] font-medium">
-                                        Alveena Casa
+                                        {service.linkTitle}
                                     </p>
                                 </div>
                                 <div className="flex items-center gap-x-8">
                                     <Image
-                                        src="https://d3aj5vjnhssdu4.cloudfront.net/wp-content/uploads/01_Alveena_Casa_London_Web_Design_New-250x250.jpg"
-                                        alt="Alveena Casa case study preview"
+                                        src={service.image}
+                                        alt={`${service.title}`}
                                         width={80}
                                         height={80}
                                         className="rounded-full object-cover"
