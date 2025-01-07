@@ -1,3 +1,6 @@
+"use client";
+import CountUp from "react-countup";
+
 const DigitalGoal = () => {
     return (
         <section className="px-[90px] py-36">
@@ -9,13 +12,21 @@ const DigitalGoal = () => {
 
                     <div className="flex items-start gap-x-16">
                         <div>
-                            <p className="text-[68px] font-semibold mb-2">
-                                250
-                            </p>
+                            <CountUp
+                                end={250}
+                                duration={5}
+                                enableScrollSpy
+                                className="text-[68px] font-semibold mb-2"
+                            />
                             <p className="text-[28px]">Five-Star Reviews</p>
                         </div>
                         <div>
-                            <p className="text-[68px] font-semibold mb-2">10</p>
+                            <CountUp
+                                end={10}
+                                duration={3}
+                                enableScrollSpy
+                                className="text-[68px] font-semibold mb-2"
+                            />
                             <p className="text-[28px]">In-House Experts</p>
                         </div>
                     </div>

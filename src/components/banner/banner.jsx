@@ -46,7 +46,10 @@ const Banner = () => {
         <div>
             <main className="mx-[90px] px-4 mt-[240px] mb-[144px]">
                 <h1 className="text-[148px] font-semibold leading-[172px] max-w-6xl">
-                    Crafting <span className="text-[#4F5FF6]">Digital</span>
+                    Crafting{" "}
+                    <span className="bg-[linear-gradient(45deg,_rgb(84,92,255),_rgb(31,34,70)_80%)] bg-clip-text text-transparent">
+                        Digital
+                    </span>
                     <br />
                     Experiences
                 </h1>

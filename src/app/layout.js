@@ -1,5 +1,6 @@
 import Footer from "@/components/footer/footer";
 import Navbar from "@/components/navbar/navbar";
+import TopProgress from "@/components/ui/topProgress";
 import { EdgeStoreProvider } from "@/lib/edgestore";
 import { Onest } from "next/font/google";
 import { Toaster } from "sonner";
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body className={`${onest.className} antialiased`}>
+                <TopProgress />
                 <Navbar />
                 <EdgeStoreProvider>{children}</EdgeStoreProvider>
                 <Footer />

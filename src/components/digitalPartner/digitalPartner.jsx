@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import CountUp from "react-countup";
 
 const DigitalPartner = () => {
     const brands = [
@@ -51,17 +54,23 @@ const DigitalPartner = () => {
                     <div className="bg-[#ECF1F4] rounded-3xl p-16">
                         <div className="grid md:grid-cols-2 divide-x divide-[#72777e59]">
                             <div className="text-center p-10">
-                                <p className="text-[68px] font-semibold mb-2">
-                                    20
-                                </p>
+                                <CountUp
+                                    end={20}
+                                    duration={3}
+                                    enableScrollSpy
+                                    className="text-[68px] font-semibold mb-2"
+                                />
                                 <p className="text-[28px] text-black">
                                     Years on the market
                                 </p>
                             </div>
                             <div className="text-center p-10">
-                                <p className="text-[68px] font-semibold mb-2">
-                                    500
-                                </p>
+                                <CountUp
+                                    end={500}
+                                    duration={5}
+                                    enableScrollSpy
+                                    className="text-[68px] font-semibold mb-2"
+                                />
                                 <p className="text-[28px] text-black">
                                     Satisfied Customers
                                 </p>
