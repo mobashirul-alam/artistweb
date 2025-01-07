@@ -1,6 +1,8 @@
 import Footer from "@/components/footer/footer";
 import Navbar from "@/components/navbar/navbar";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 import { Onest } from "next/font/google";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const onest = Onest({
@@ -18,8 +20,9 @@ export default function RootLayout({ children }) {
         <html lang="en">
             <body className={`${onest.className} antialiased`}>
                 <Navbar />
-                {children}
+                <EdgeStoreProvider>{children}</EdgeStoreProvider>
                 <Footer />
+                <Toaster richColors />
             </body>
         </html>
     );
