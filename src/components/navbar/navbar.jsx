@@ -3,6 +3,7 @@
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 import { PiEquals } from "react-icons/pi";
@@ -125,7 +126,7 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`fixed w-full transition-all duration-300 z-50 ${
+            className={`fixed w-full transition-all duration-300 z-10 ${
                 scrollDirection === "down" ? "-top-[100px]" : "top-0"
             } ${
                 isScrolled
@@ -135,26 +136,34 @@ const Navbar = () => {
         >
             <div className="mx-[90px] px-4 py-6 flex justify-between items-center h-[100px]">
                 <Link href="/" className="text-2xl font-bold">
-                    ML
+                    <div className="hover:animate-pulse">
+                        <Image
+                            src="/images/logo-black.svg"
+                            alt="Artistweb"
+                            width={60}
+                            height={60}
+                        />
+                    </div>
                 </Link>
                 <div className="flex items-center gap-4">
-                    <button
+                    <Link
                         ref={buttonRef}
+                        href="/dashboard"
                         className="relative px-6 py-3 text-base font-medium rounded-full border border-[#545cff] overflow-hidden inline-block w-[143px] h-[38px]"
                     >
                         <span
                             ref={text1Ref}
                             className="absolute w-full text-center top-1/2 left-0 -translate-y-1/2"
                         >
-                            Get in touch
+                            Dashboard
                         </span>
                         <span
                             ref={text2Ref}
                             className="absolute w-full text-center top-1/2 left-0 -translate-y-1/2"
                         >
-                            Get in touch
+                            Dashboard
                         </span>
-                    </button>
+                    </Link>
 
                     <Modal>
                         <ModalTrigger>

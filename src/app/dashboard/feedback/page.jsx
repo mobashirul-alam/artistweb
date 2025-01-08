@@ -3,6 +3,7 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { FaPlus } from "react-icons/fa6";
+import FeedbackDataTable from "./(components)/feedbackDataTable";
 
 const FeedbackPage = () => {
     return (
@@ -22,6 +23,7 @@ const FeedbackPage = () => {
                 </Link>
             </div>
             <Separator className="mb-4" />
+            <FeedbackDataTable />
         </div>
     );
 };

@@ -3,6 +3,7 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { FaPlus } from "react-icons/fa6";
+import WorkDataTable from "./workDataTable";
 
 const WorkDashboard = () => {
     return (
@@ -22,6 +23,7 @@ const WorkDashboard = () => {
                 </Link>
             </div>
             <Separator className="mb-4" />
+            <WorkDataTable />
         </div>
     );
 };

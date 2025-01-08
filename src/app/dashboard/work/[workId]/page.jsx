@@ -18,6 +18,7 @@ import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { SlClose } from "react-icons/sl";
 import { toast } from "sonner";
@@ -31,20 +32,32 @@ const formSchema = z.object({
 });
 
 const WorkForm = () => {
+    const router = useRouter();
     const form = useForm({
         resolver: zodResolver(formSchema),
     });
 
-    function onSubmit(values) {
+    async function onSubmit(values) {
         try {
-            console.log(values);
-            toast(
-                <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                    <code className="text-white">
-                        {JSON.stringify(values, null, 2)}
-                    </code>
-                </pre>
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/work`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(values),
+                }
             );
+
+            if (!response.ok) {
+                toast.error("Failed to create work");
+                return;
+            }
+
+            const data = await response.json();
+            toast.success("Work created successfully!");
+            router.push("/dashboard/work");
         } catch (error) {
             console.error("Form submission error", error);
             toast.error("Failed to submit the form. Please try again.");

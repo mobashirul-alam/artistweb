@@ -11,23 +11,29 @@ const ElevateLine = () => {
     const textRef = useRef(null);
 
     useGSAP(() => {
-        gsap.set(textRef.current, { x: "35%" });
+        gsap.set(textRef.current, { x: "50%" });
         gsap.to(textRef.current, {
-            x: "-35%",
+            x: "-50%",
             scrollTrigger: {
                 trigger: textRef.current,
                 start: "top 75%",
-                end: "top 10%",
+                end: "top 0%",
                 scrub: 2,
             },
         });
     }, []);
 
     return (
-        <div className="py-36 overflow-x-hidden">
+        <div
+            data-scroll
+            data-scroll-speed="0.5"
+            className="py-36 overflow-x-hidden"
+        >
             <h1
                 ref={textRef}
                 className="text-[180px] font-semibold leading-[208px] whitespace-nowrap will-change-transform"
+                data-scroll
+                data-scroll-speed="0.1"
             >
                 Elevate your digital presence
             </h1>

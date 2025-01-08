@@ -1,6 +1,9 @@
 import Footer from "@/components/footer/footer";
 import Navbar from "@/components/navbar/navbar";
+import LoadingOverlay from "@/components/ui/loading-overlay";
 import TopProgress from "@/components/ui/topProgress";
+import { LoadingProvider } from "@/context/loading-context";
+import ScrollContext from "@/context/scroll-context";
 import { EdgeStoreProvider } from "@/lib/edgestore";
 import { Onest } from "next/font/google";
 import { Toaster } from "sonner";
@@ -20,11 +23,16 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body className={`${onest.className} antialiased`}>
-                <TopProgress />
-                <Navbar />
-                <EdgeStoreProvider>{children}</EdgeStoreProvider>
-                <Footer />
-                <Toaster richColors />
+                <ScrollContext>
+                    <LoadingProvider>
+                        <LoadingOverlay />
+                        <TopProgress />
+                        <Navbar />
+                        <EdgeStoreProvider>{children}</EdgeStoreProvider>
+                        <Footer />
+                        <Toaster richColors />
+                    </LoadingProvider>
+                </ScrollContext>
             </body>
         </html>
     );

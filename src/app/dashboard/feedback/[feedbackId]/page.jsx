@@ -16,6 +16,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { SlClose } from "react-icons/sl";
 import { toast } from "sonner";
@@ -27,37 +28,40 @@ const formSchema = z.object({
     }),
     name: z.string().min(1, "Name is required"),
     companyName: z.string().min(1, "Company Name is required"),
-    image: z.string().min(1, "Image is required"),
+    logo: z.string().min(1, "Logo is required"),
 });
 
 const FeedbackForm = () => {
+    const router = useRouter();
     const form = useForm({
         resolver: zodResolver(formSchema),
     });
 
-    function onSubmit(values) {
+    async function onSubmit(values) {
         try {
-            console.log(values);
-            toast(
-                <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                    <code className="text-white">
-                        {JSON.stringify(values, null, 2)}
-                    </code>
-                </pre>
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/feedback`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(values),
+                }
             );
+
+            if (!response.ok) {
+                throw new Error("Failed to create feedback");
+            }
+
+            const data = await response.json();
+            toast.success("Feedback created successfully!");
+            router.push("/dashboard/feedback");
         } catch (error) {
             console.error("Form submission error", error);
             toast.error("Failed to submit the form. Please try again.");
         }
     }
-
-    const tagsInfo = [
-        { label: "UI/UX Design", value: "UI/UX Design" },
-        { label: "Development", value: "Development" },
-        { label: "Property Portal", value: "Property Portal" },
-        { label: "E-Commerce", value: "E-Commerce" },
-        { label: "Digital Product", value: "Digital Product" },
-    ];
 
     return (
         <div>
@@ -144,7 +148,7 @@ const FeedbackForm = () => {
                     {/* Image upload */}
                     <FormField
                         control={form.control}
-                        name="image"
+                        name="logo"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Logo</FormLabel>
