@@ -2,7 +2,11 @@
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
+import SplitType from "split-type";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const OurService = () => {
     const services = [
@@ -17,12 +21,81 @@ const OurService = () => {
     const buttonRef = useRef(null);
     const text1Ref = useRef(null);
     const text2Ref = useRef(null);
+    const sectionRef = useRef(null);
+    const titleRef = useRef(null);
+    const servicesRef = useRef(null);
+    const contactRef = useRef(null);
 
     useGSAP(() => {
         const button = buttonRef.current;
         const text1 = text1Ref.current;
         const text2 = text2Ref.current;
+        const title = titleRef.current;
+        const services = servicesRef.current;
+        const contact = contactRef.current;
 
+        // Create timeline for entrance animations
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: sectionRef.current,
+                start: "top 70%",
+                end: "bottom bottom",
+            },
+        });
+
+        // Split and animate the title
+        const titleText = new SplitType(title, {
+            types: "words",
+            wordClass: "word-split",
+        });
+
+        gsap.set(titleText.words, {
+            opacity: 0,
+            y: 50,
+            display: "inline-block",
+        });
+
+        tl.to(titleText.words, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "power3.out",
+        });
+
+        // Animate services list
+        const serviceItems = services.querySelectorAll("h3");
+        gsap.set(serviceItems, {
+            opacity: 0,
+            y: 50,
+        });
+
+        tl.to(serviceItems, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "power3.out",
+        });
+
+        // Add animation for countRef
+        gsap.fromTo(
+            contact,
+            {
+                clipPath: "inset(0 0 100% 0)",
+            },
+            {
+                clipPath: "inset(0 0 0% 0)",
+                duration: 1,
+                ease: "power3.inOut",
+                scrollTrigger: {
+                    trigger: contact,
+                    start: "top 70%",
+                },
+            }
+        );
+
+        // Button hover animation
         if (button && text1 && text2) {
             // Set initial state
             gsap.set(text1, { y: 0, opacity: 1 });
@@ -52,14 +125,17 @@ const OurService = () => {
     }, []);
 
     return (
-        <section className="py-36 px-[90px]">
+        <section ref={sectionRef} className="py-36 px-[90px]">
             <div className="flex justify-between">
                 <div className="space-y-7">
-                    <h2 className="text-[68px] font-semibold leading-[94px]">
+                    <h2
+                        ref={titleRef}
+                        className="text-[68px] font-semibold leading-[94px]"
+                    >
                         We're good at
                     </h2>
 
-                    <div>
+                    <div ref={servicesRef}>
                         <p className="text-base mb-4">Services</p>
                         {services.map((service) => (
                             <h3
@@ -72,7 +148,10 @@ const OurService = () => {
                     </div>
                 </div>
 
-                <div className="flex justify-end items-end max-w-4xl">
+                <div
+                    ref={contactRef}
+                    className="flex justify-end items-end max-w-4xl"
+                >
                     <div className="bg-[#4F46E5] text-white p-16 rounded-[32px]">
                         <h3 className="text-[48px] font-semibold mb-8 leading-[68px]">
                             Let's start with a conversation about how we can

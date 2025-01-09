@@ -1,6 +1,7 @@
 "use client";
 
 import { formatFileSize } from "@edgestore/react/utils";
+import Image from "next/image";
 
 import * as React from "react";
 import { useDropzone } from "react-dropzone";
@@ -139,10 +140,12 @@ const SingleImageDropzone = React.forwardRef(
 
                     {imageUrl ? (
                         // Image Preview
-                        <img
+                        <Image
                             className="h-full w-full rounded-md object-cover"
                             src={imageUrl}
                             alt={acceptedFiles[0]?.name}
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
                     ) : (
                         // Upload Icon
