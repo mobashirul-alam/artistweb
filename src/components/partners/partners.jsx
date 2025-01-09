@@ -71,7 +71,7 @@ const Partners = () => {
     });
 
     return (
-        <section className="py-36 px-[90px]" ref={sectionRef}>
+        <section className="pt-36 pb-24 px-[90px]" ref={sectionRef}>
             <div className="space-y-36">
                 <h2
                     ref={textRef}

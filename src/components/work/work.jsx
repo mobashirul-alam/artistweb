@@ -48,16 +48,23 @@ const Work = () => {
         const work = workRef.current;
         const trigger = triggerRef.current;
 
-        // ScrollTrigger Animation for the Section
-        if (work) {
-            gsap.set(work, { transform: "translateX(0)" }); // Set initial state
+        if (!isLoading && workRef.current) {
+            const work = workRef.current;
+            const trigger = triggerRef.current;
+
+            // Calculate scroll width after cards are rendered
+            const workWidth = work.scrollWidth;
+            const viewportWidth = window.innerWidth;
+            const translateXValue = Math.max(workWidth - viewportWidth, 0);
+
+            gsap.set(work, { transform: "translateX(0)" }); // Initial state
             gsap.to(work, {
-                transform: "translateX(-165%)",
+                transform: `translateX(-${translateXValue + 150}px)`, // Dynamically calculated width
                 scrollTrigger: {
                     trigger: trigger,
                     start: "top 15%",
-                    end: "top -200%",
-                    scrub: 1,
+                    end: `+=${translateXValue}`,
+                    scrub: 2,
                     pin: true,
                 },
             });
@@ -89,7 +96,7 @@ const Work = () => {
                 gsap.set(text2, { y: 50, opacity: 0 });
             });
         }
-    }, []);
+    }, [isLoading]);
 
     return (
         <div>

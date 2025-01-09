@@ -27,7 +27,7 @@ const ElevateLine = () => {
         <div
             data-scroll
             data-scroll-speed="0.5"
-            className="py-36 overflow-x-hidden"
+            className="py-28 overflow-x-hidden"
         >
             <h1
                 ref={textRef}
