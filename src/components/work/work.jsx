@@ -3,15 +3,41 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import WorkCard from "../cards/workCard";
+import WorkCardSkeleton from "../cards/workCardSkeleton";
 
 const Work = () => {
+    const [works, setWorks] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const buttonRef = useRef(null);
     const text1Ref = useRef(null);
     const text2Ref = useRef(null);
     const workRef = useRef(null);
     const triggerRef = useRef(null);
+
+    useEffect(() => {
+        const fetchWorks = async () => {
+            try {
+                setIsLoading(true);
+                const response = await fetch(
+                    `${process.env.NEXT_PUBLIC_API_URL}/work`
+                );
+                if (!response.ok) {
+                    throw new Error("Failed to fetch works");
+                }
+                const data = await response.json();
+                setWorks(data || []); // Assuming the API returns { works: [...] }
+            } catch (error) {
+                console.error("Error fetching works:", error);
+                setWorks([]);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchWorks();
+    }, []);
 
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -79,7 +105,11 @@ const Work = () => {
                                     Work
                                 </h1>
                                 <div className="w-[70px] h-[70px] text-2xl rounded-full border border-[#0000004d] flex items-center justify-center">
-                                    13
+                                    {isLoading ? (
+                                        <div className="w-8 h-8 rounded-full border-4 border-gray-300 border-t-[#545CFF] animate-spin" />
+                                    ) : (
+                                        works.length
+                                    )}
                                 </div>
                             </div>
                             <p className="text-[28px] mt-4 max-w-sm">
@@ -106,10 +136,23 @@ const Work = () => {
                         </button>
                     </div>
 
-                    <WorkCard />
-                    <WorkCard />
-                    <WorkCard />
-                    <WorkCard />
+                    {isLoading ? (
+                        <>
+                            <WorkCardSkeleton />
+                            <WorkCardSkeleton />
+                            <WorkCardSkeleton />
+                        </>
+                    ) : (
+                        works.map((work) => (
+                            <WorkCard
+                                key={work._id}
+                                image={work.image}
+                                title={work.title}
+                                tags={work.tags}
+                                isLatest={work.isLatest}
+                            />
+                        ))
+                    )}
 
                     <div className="min-w-[625px] h-[598px] flex flex-col justify-center items-center">
                         <h1 className="text-[68px] leading-[94px] font-semibold">

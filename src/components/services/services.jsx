@@ -56,7 +56,7 @@ const Services = () => {
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: sectionRef.current,
-                start: "top 60%",
+                start: "top 70%",
                 end: "bottom bottom",
             },
         });
@@ -92,7 +92,7 @@ const Services = () => {
             ease: "power3.out",
             scrollTrigger: {
                 trigger: servicesRef.current,
-                start: "top 70%",
+                start: "top 85%",
             },
         });
 
@@ -105,7 +105,7 @@ const Services = () => {
             ease: "power3.out",
             scrollTrigger: {
                 trigger: agencyRef.current,
-                start: "top 70%",
+                start: "top 85%",
             },
         });
     }, []);
@@ -113,7 +113,7 @@ const Services = () => {
     return (
         <section
             ref={sectionRef}
-            className="bg-black text-white px-[90px] py-36 bg-[radial-gradient(circle_at_75%_140%,_#545cff_0%,_transparent_35%)]"
+            className="bg-[#111111] text-white px-[90px] py-36 bg-[radial-gradient(circle_at_75%_140%,_#545cff_0%,_transparent_35%)]"
         >
             <div>
                 <div className="overflow-hidden">

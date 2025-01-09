@@ -22,12 +22,14 @@ const DigitalPartner = () => {
     const textRef = useRef(null);
     const brandsRef = useRef(null);
     const brandsTextRef = useRef(null);
+    const countRef = useRef(null);
+    const teamImageRef = useRef(null);
 
     useGSAP(() => {
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: sectionRef.current,
-                start: "top 60%",
+                start: "top 70%",
                 end: "bottom bottom",
             },
         });
@@ -83,7 +85,7 @@ const DigitalPartner = () => {
             ease: "power3.out",
             scrollTrigger: {
                 trigger: brandsRef.current,
-                start: "top 85%",
+                start: "top 90%",
             },
         });
 
@@ -95,9 +97,45 @@ const DigitalPartner = () => {
             ease: "power3.out",
             scrollTrigger: {
                 trigger: brandsTextRef.current,
-                start: "top 85%",
+                start: "top 90%",
             },
         });
+
+        // Add animation for countRef
+        gsap.fromTo(
+            countRef.current,
+            {
+                clipPath: "inset(0 0 100% 0)",
+            },
+            {
+                clipPath: "inset(0 0 0% 0)",
+                duration: 1,
+                ease: "power3.inOut",
+                scrollTrigger: {
+                    trigger: countRef.current,
+                    start: "top 90%",
+                },
+            }
+        );
+
+        // Add animation for team image
+        gsap.fromTo(
+            teamImageRef.current,
+            {
+                opacity: 0,
+                y: 50,
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: teamImageRef.current,
+                    start: "top 90%",
+                },
+            }
+        );
     }, []);
 
     return (
@@ -147,7 +185,10 @@ const DigitalPartner = () => {
                     </div>
                 </div>
                 <div className="flex justify-end items-end">
-                    <div className="bg-[#ECF1F4] rounded-3xl p-16">
+                    <div
+                        ref={countRef}
+                        className="bg-[#ECF1F4] rounded-3xl p-16"
+                    >
                         <div className="grid md:grid-cols-2 divide-x divide-[#72777e59]">
                             <div className="text-center p-10">
                                 <CountUp
@@ -163,7 +204,7 @@ const DigitalPartner = () => {
                             <div className="text-center p-10">
                                 <CountUp
                                     end={500}
-                                    duration={5}
+                                    duration={3}
                                     enableScrollSpy
                                     className="text-[68px] font-semibold mb-2"
                                 />
@@ -177,13 +218,15 @@ const DigitalPartner = () => {
             </section>
 
             <section className="px-[90px]">
-                <Image
-                    src="/images/team-a.jpg"
-                    alt="team"
-                    width={1920}
-                    height={982}
-                    className="w-full h-[982px] object-cover rounded-[40px]"
-                />
+                <div ref={teamImageRef}>
+                    <Image
+                        src="/images/team-a.jpg"
+                        alt="team"
+                        width={1920}
+                        height={982}
+                        className="w-full h-[982px] object-cover rounded-[40px]"
+                    />
+                </div>
             </section>
         </section>
     );

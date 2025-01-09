@@ -35,7 +35,7 @@ const LoadingOverlay = () => {
     return (
         <div
             ref={overlayRef}
-            className="fixed inset-0 z-50 bg-black flex items-center justify-center"
+            className="fixed inset-0 z-50 bg-[#111111] flex items-center justify-center"
         >
             <div className="animate-bounce">
                 <Image
