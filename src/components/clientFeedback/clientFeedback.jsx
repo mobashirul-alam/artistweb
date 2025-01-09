@@ -72,7 +72,7 @@ const ClientFeedback = () => {
                     {
                         y: 0,
                         scale: 1,
-                        duration: 1.5,
+                        duration: 1,
                         ease: "power3.out",
                         scrollTrigger: {
                             trigger: card,
